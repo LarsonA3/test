@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float ttl = 8000;
     public float speed = 95f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,8 +18,7 @@ public class Bullet : MonoBehaviour
 
 
         // destroy after certain amount of time. TTL is set high # to account for any frame rate
-        ttl = ttl - 1; 
-        if (ttl == 0) {
+        if (Mathf.Abs(this.transform.position.x - 10.63f) < 0.1f) {
             Destroy(this.gameObject);
         }
         
