@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
 
         // destroy after certain amount of time. TTL is set high # to account for any frame rate
-        if (Mathf.Abs(this.transform.position.x - 10.63f) < 0.1f) {
+        if (Mathf.Abs(this.transform.position.x - 10.63f) < 0.3f) {
             Destroy(this.gameObject);
         }
         
