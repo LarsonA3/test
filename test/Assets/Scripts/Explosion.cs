@@ -7,7 +7,7 @@ public class Explosion : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(ScaleAndDestroy());
+        StartCoroutine(Effect());
     }
 
     // Update is called once per frame
@@ -16,15 +16,21 @@ public class Explosion : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("EnemyPhysicalHit"))
         {
             Destroy(collision.gameObject);
         }
+        if (collision.transform.root.gameObject.CompareTag("Player"))//////ISSUE - PLAYER CANNOT GET HURT IN OWN EXPLOSION RN
+        {
+            Debug.Log("plr got hit by explosion");
+            GameManager.instance.LoseLife();
+            //Destroy(this.gameObject.GetComponent<Collider2D>()); 
+        }
     }
 
-    IEnumerator ScaleAndDestroy()
+    IEnumerator Effect()
     {
         Vector3 original = transform.localScale;
         float t = 0f;
