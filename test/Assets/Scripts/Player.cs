@@ -92,13 +92,13 @@
 
 
         private void OnCollisionExit2D(Collision2D collision)
-      {
+        {
             if (collision.gameObject.CompareTag("EnemyPhysicalHit"))
             {
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
   
-      }
+        }
 
 
     }

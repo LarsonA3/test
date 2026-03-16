@@ -26,13 +26,16 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     }
 
+    private bool hitAlready = false;
     // player hit logic
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (hitAlready == true) return;
+            hitAlready = true;
             // send to GameManager to remove life
-            //////////////////////////////////ADDD
+            GameManager.instance.LoseLife();
 
             // destroy own hitbox
             Destroy(selfcollider);
