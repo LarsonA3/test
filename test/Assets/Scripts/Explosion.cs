@@ -22,7 +22,7 @@ public class Explosion : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-        if (collision.transform.root.gameObject.CompareTag("Player"))//////ISSUE - PLAYER CANNOT GET HURT IN OWN EXPLOSION RN
+        if (collision.transform.root.gameObject.CompareTag("Player"))
         {
             Debug.Log("plr got hit by explosion");
             GameManager.instance.LoseLife();
