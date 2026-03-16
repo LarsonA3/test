@@ -136,6 +136,15 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire Missile"",
+                    ""type"": ""Button"",
+                    ""id"": ""c00d69b7-f6a5-4572-af76-828ea4c4f25d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -237,6 +246,17 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
                     ""action"": ""Move Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f9340e9-0fa9-4cc6-bee1-f16bef63ed11"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire Missile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +270,7 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
         m_Standard_Fire = m_Standard.FindAction("Fire", throwIfNotFound: true);
         m_Standard_MoveLeft = m_Standard.FindAction("Move Left", throwIfNotFound: true);
         m_Standard_MoveRight = m_Standard.FindAction("Move Right", throwIfNotFound: true);
+        m_Standard_FireMissile = m_Standard.FindAction("Fire Missile", throwIfNotFound: true);
     }
 
     ~@SpaceShooterInputActions()
@@ -335,6 +356,7 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
     private readonly InputAction m_Standard_Fire;
     private readonly InputAction m_Standard_MoveLeft;
     private readonly InputAction m_Standard_MoveRight;
+    private readonly InputAction m_Standard_FireMissile;
     /// <summary>
     /// Provides access to input actions defined in input action map "Standard".
     /// </summary>
@@ -366,6 +388,10 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
         /// Provides access to the underlying input action "Standard/MoveRight".
         /// </summary>
         public InputAction @MoveRight => m_Wrapper.m_Standard_MoveRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/FireMissile".
+        /// </summary>
+        public InputAction @FireMissile => m_Wrapper.m_Standard_FireMissile;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -407,6 +433,9 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
             @MoveRight.started += instance.OnMoveRight;
             @MoveRight.performed += instance.OnMoveRight;
             @MoveRight.canceled += instance.OnMoveRight;
+            @FireMissile.started += instance.OnFireMissile;
+            @FireMissile.performed += instance.OnFireMissile;
+            @FireMissile.canceled += instance.OnFireMissile;
         }
 
         /// <summary>
@@ -433,6 +462,9 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
             @MoveRight.started -= instance.OnMoveRight;
             @MoveRight.performed -= instance.OnMoveRight;
             @MoveRight.canceled -= instance.OnMoveRight;
+            @FireMissile.started -= instance.OnFireMissile;
+            @FireMissile.performed -= instance.OnFireMissile;
+            @FireMissile.canceled -= instance.OnFireMissile;
         }
 
         /// <summary>
@@ -508,5 +540,12 @@ public partial class @SpaceShooterInputActions: IInputActionCollection2, IDispos
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Fire Missile" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFireMissile(InputAction.CallbackContext context);
     }
 }
