@@ -32,7 +32,12 @@
             // FIRE BULLET
             if (inputActions.Standard.Fire.WasPressedThisFrame())
             {
-                GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                if (GameManager.instance.CanFire() == true)
+                {
+                    GameManager.instance.RemoveEnergy();
+                    GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                }
+                
             }
              
             // FIRE MISSILE

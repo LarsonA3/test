@@ -22,11 +22,12 @@ public class EnemyTANK : MonoBehaviour
 
         //shoot Enemyprojectile aimed directly at player every so often (maybe random chance to shoot missile..?)
 
+        //if health = 0 award points and destroy
     }
 
-    //check for if shot (award points)
+    //check for if shot (reduce hp)
 
     //check for if physically touched (dmg plr then destroy)
 
-    //check for asteroid hit
+    //check for asteroid hit (reduce hp and destroy asteroid)
 }

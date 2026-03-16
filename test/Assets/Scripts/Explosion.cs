@@ -20,6 +20,7 @@ public class Explosion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyPhysicalHit"))
         {
+            GameManager.instance.awardPoints(7, "asteroid destroyed by missile");
             Destroy(collision.gameObject);
         }
         if (collision.transform.root.gameObject.CompareTag("Player"))

@@ -30,6 +30,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (health < 1 )
         {
             Destroy(this.gameObject);
+            GameManager.instance.awardPoints(5, "asteroid destroyed by bullet (presumably)");
         }
 
     }
