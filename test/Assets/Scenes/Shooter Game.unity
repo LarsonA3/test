@@ -1797,6 +1797,10 @@ MonoBehaviour:
   missilePrefab: {fileID: 4530767558206496699, guid: e06d058ccd94abc43a298554fc7326b0, type: 3}
   bulletSpawnPoint: {fileID: 101424959}
   missileSpawnPoint: {fileID: 137521784}
+  missiles1: {fileID: 708191341}
+  missiles2: {fileID: 830224197}
+  missiles3: {fileID: 371802476}
+  missiles4: {fileID: 332857614}
 --- !u!1 &823748058
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,35 +69,6 @@ public class GameManager : MonoBehaviour
 
 
 
-        //CHANGE UI TO REPRESENT CORRECT LIVES
-        //lives
-        if (Lives == 0)
-        {
-            Lives1.gameObject.SetActive(false);
-            Lives2.gameObject.SetActive(false);
-            Lives3.gameObject.SetActive(false);
-        } else if (Lives == 1)
-        {
-            Lives1.gameObject.SetActive(true);
-            Lives2.gameObject.SetActive(false);
-            Lives3.gameObject.SetActive(false);
-        } else if (Lives == 2)
-        {
-            Lives1.gameObject.SetActive(true);
-            Lives2.gameObject.SetActive(true);
-            Lives3.gameObject.SetActive(false);
-        } else if (Lives == 3)
-        {
-            Lives1.gameObject.SetActive(true);
-            Lives2.gameObject.SetActive(true);
-            Lives3.gameObject.SetActive(true);
-        } else
-        {
-            print("ERROR: NOT ENOUGH UI SPRITES TO REPRESENT HEALTH, OR OUT OF RANGE");
-            Lives1.gameObject.SetActive(false);
-            Lives2.gameObject.SetActive(false);
-            Lives3.gameObject.SetActive(false);
-        }
         
 
     }
@@ -109,8 +80,42 @@ public class GameManager : MonoBehaviour
     public void LoseLife()
     {
         Lives--;
+        print("lost life");
         //additionally, remove x points
         removePoints(10);
+        print("removed pts");
+        //CHANGE UI TO REPRESENT CORRECT LIVES
+        if (Lives == 0)
+        {
+            Lives1.gameObject.SetActive(false);
+            Lives2.gameObject.SetActive(false);
+            Lives3.gameObject.SetActive(false);
+        }
+        else if (Lives == 1)
+        {
+            Lives1.gameObject.SetActive(true);
+            Lives2.gameObject.SetActive(false);
+            Lives3.gameObject.SetActive(false);
+        }
+        else if (Lives == 2)
+        {
+            Lives1.gameObject.SetActive(true);
+            Lives2.gameObject.SetActive(true);
+            Lives3.gameObject.SetActive(false);
+        }
+        else if (Lives == 3)
+        {
+            Lives1.gameObject.SetActive(true);
+            Lives2.gameObject.SetActive(true);
+            Lives3.gameObject.SetActive(true);
+        }
+        else
+        {
+            print("ERROR: NOT ENOUGH UI SPRITES TO REPRESENT HEALTH, OR OUT OF RANGE");
+            Lives1.gameObject.SetActive(false);
+            Lives2.gameObject.SetActive(false);
+            Lives3.gameObject.SetActive(false);
+        }
     }
 
     //function that player calls to see if they can fire or not
@@ -135,13 +140,13 @@ public class GameManager : MonoBehaviour
     public void awardPoints(int pts, string msg)
     {
         Points = Points + pts;
-        ScoreText.text = "SCORE: " + pts;
+        ScoreText.text = "SCORE: " + Points;
         Debug.Log(msg + ", awarded " + pts + " points!");
     }
     public void removePoints(int pts)
     {
         Points = Points - pts;
-        ScoreText.text = "SCORE: " + pts;
+        ScoreText.text = "SCORE: " + Points;
         Debug.Log($"REMOVED {pts} points!"); // string interpolation example
     }
 
