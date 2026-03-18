@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     // GAME MANAGER
     // will control the level, spawns, moving to next, score, lives, game over, etc
     public Slider sliderEnergy;
+    public TextMeshProUGUI ScoreText;
     public static GameManager instance; // so other things can call this
     //vars
     public int Lives = 3;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ScoreText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     float timer = 0f;
@@ -95,12 +96,14 @@ public class GameManager : MonoBehaviour
     public void awardPoints(int pts, string msg)
     {
         Points = Points + pts;
+        ScoreText.text = "SCORE: " + pts;
         Debug.Log(msg + ", awarded " + pts + " points!");
     }
     public void removePoints(int pts)
     {
         Points = Points - pts;
-        Debug.Log("REMOVED " + pts + " points!");
+        ScoreText.text = "SCORE: " + pts;
+        Debug.Log($"REMOVED {pts} points!"); // string interpolation example
     }
 
 }
