@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2632661166810750586}
   - component: {fileID: 5319137026940534643}
+  - component: {fileID: 6659727758020774669}
+  - component: {fileID: 100019941127011361}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -85,6 +87,46 @@ PolygonCollider2D:
       - {x: 0.29196692, y: -0.38527632}
       - {x: 0.3089127, y: -0.37372106}
   m_UseDelaunayMesh: 1
+--- !u!114 &6659727758020774669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741923714434506968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec786a013c555234a9fba878ec322f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DEMO_Enemy
+  speed: 0
+--- !u!50 &100019941127011361
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741923714434506968}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5094916158197336674
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
     // GAME MANAGER
     // will control the level, spawns, moving to next, score, lives, game over, etc
-
+    public Slider sliderEnergy;
     public static GameManager instance; // so other things can call this
     //vars
     public int Lives = 3;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
             if (Energy > 9)
             {
                 Energy = Energy + 2; // gives player 2 energy if above half. rewards player for conservation and punishes spam
+                
             } else
             {
                 Energy++;
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (Points < 0) Points = 0; //makes sure points cant go below 0. might be moved to method later
+        sliderEnergy.value = (float)Energy / maxEnergy; //set 
     }
 
 

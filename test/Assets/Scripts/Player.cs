@@ -12,7 +12,7 @@
       public Transform bulletSpawnPoint;
       public Transform missileSpawnPoint;
 
-      private SpaceShooterInputActions inputActions;
+      private SpaceShooterInput.StandardActions input;
 
       private int missileAmount = 5;
   
@@ -22,15 +22,16 @@
       private const float X_LIMIT = 9.92f;
 
       private void Start() {
-        inputActions = new();
-        inputActions.Enable();
-        inputActions.Standard.Enable();
+        input = new SpaceShooterinput();
+        input.Enable();
+        input = input.Standard;
+        input.Enable();
       }
 
         private void Update()
         {
             // FIRE BULLET
-            if (inputActions.Standard.Fire.WasPressedThisFrame())
+            if (input.Standard.Fire.WasPressedThisFrame())
             {
                 if (GameManager.instance.CanFire() == true)
                 {
@@ -41,7 +42,7 @@
             }
              
             // FIRE MISSILE
-            if (inputActions.Standard.FireMissile.WasPressedThisFrame())
+            if (input.Standard.FireMissile.WasPressedThisFrame())
             {
                 if (missileAmount > 0) {
                     GameObject MissileObj = Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
@@ -52,20 +53,29 @@
                 
             }
 
+            //up down
+            //NEW STUFF
+            var vertMove = input.MoveVertically.ReadValue<float>(); // GIVES you -1 or +1 based on input
+            this.transform.Translate(Vector3.up * speed * Time.deltaTime);
 
-            if (inputActions.Standard.MoveUp.IsPressed())
+
+            if (input.Standard.MoveUp.IsPressed())
             {
                 this.transform.Translate(Vector3.up * speed * Time.deltaTime);
             }
-            if (inputActions.Standard.MoveDown.IsPressed())
+            if (input.Standard.MoveDown.IsPressed())
             {
                 this.transform.Translate(Vector3.down * speed * Time.deltaTime);
             }
-            if (inputActions.Standard.MoveLeft.IsPressed())
+
+
+            //OLD
+            //left right
+            if (input.Standard.MoveLeft.IsPressed())
             {
                 this.transform.Translate(Vector3.left * LRspeed * Time.deltaTime);
             }
-            if (inputActions.Standard.MoveRight.IsPressed())
+            if (input.Standard.MoveRight.IsPressed())
             {
                 this.transform.Translate(Vector3.right * LRspeed * Time.deltaTime);
             }
