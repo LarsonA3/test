@@ -1770,6 +1770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80497dcd08d283b41b8915c59016bd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  sliderEnergy: {fileID: 891043027}
+  ScoreText: {fileID: 396105295}
   Lives: 3
   Points: 0
   maxEnergy: 20
@@ -1815,7 +1817,7 @@ GameObject:
   - component: {fileID: 1723857824}
   - component: {fileID: 1723857825}
   m_Layer: 5
-  m_Name: ShieldBar
+  m_Name: PowerBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

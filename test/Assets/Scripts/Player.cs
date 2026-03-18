@@ -12,7 +12,7 @@
       public Transform bulletSpawnPoint;
       public Transform missileSpawnPoint;
 
-      private SpaceShooterInput.StandardActions input;
+      private SpaceShooterInputActions input;
 
       private int missileAmount = 5;
   
@@ -22,9 +22,7 @@
       private const float X_LIMIT = 9.92f;
 
       private void Start() {
-        input = new SpaceShooterinput();
-        input.Enable();
-        input = input.Standard;
+        input = new SpaceShooterInputActions();
         input.Enable();
       }
 
@@ -55,10 +53,11 @@
 
             //up down
             //NEW STUFF
-            var vertMove = input.MoveVertically.ReadValue<float>(); // GIVES you -1 or +1 based on input
-            this.transform.Translate(Vector3.up * speed * Time.deltaTime);
+            float vertMove = input.Standard.MoveVertically.ReadValue<float>(); // GIVES you -1 or +1 based on input
+            this.transform.Translate(Vector3.up * vertMove * speed * Time.deltaTime);
 
 
+        /*
             if (input.Standard.MoveUp.IsPressed())
             {
                 this.transform.Translate(Vector3.up * speed * Time.deltaTime);
@@ -67,11 +66,11 @@
             {
                 this.transform.Translate(Vector3.down * speed * Time.deltaTime);
             }
+        */
 
-
-            //OLD
-            //left right
-            if (input.Standard.MoveLeft.IsPressed())
+        //OLD
+        //left right
+        if (input.Standard.MoveLeft.IsPressed())
             {
                 this.transform.Translate(Vector3.left * LRspeed * Time.deltaTime);
             }

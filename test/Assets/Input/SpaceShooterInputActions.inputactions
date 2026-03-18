@@ -44,12 +44,12 @@
                 },
                 {
                     "name": "MoveVertically",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "405b087b-d266-497e-ba74-36bfdac0a514",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -120,18 +120,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "b2c01842-1f23-4eb4-9789-c79839a7da32",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveVertically",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "MoveUp",
+                    "name": "Move",
                     "id": "8303279f-903f-4d7b-b27b-8f1aa2341fca",
                     "path": "1DAxis",
                     "interactions": "",
@@ -164,8 +153,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "MoveDown",
-                    "id": "dbd5c104-d663-4666-be08-9991262949dd",
+                    "name": "1D Axis",
+                    "id": "6e63ecb3-4e7a-411a-9b30-0869fdcf3f22",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
@@ -176,8 +165,8 @@
                 },
                 {
                     "name": "negative",
-                    "id": "44adb118-e4e8-4933-8091-ac4e753e8c5c",
-                    "path": "<Keyboard>/w",
+                    "id": "71a501fa-221c-49d6-ad15-60246a36e4c7",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -187,8 +176,8 @@
                 },
                 {
                     "name": "positive",
-                    "id": "6643fc21-7133-437b-b7dd-bc37556f2e16",
-                    "path": "<Keyboard>/s",
+                    "id": "26c82f80-3d80-4c28-8695-17a78572d6b3",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
