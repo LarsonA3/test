@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     // will control the level, spawns, moving to next, score, lives, game over, etc
     public Slider sliderEnergy;
     public TextMeshProUGUI ScoreText;
+
+    public Image Lives1; public Image Lives2; public Image Lives3;
+
     public static GameManager instance; // so other things can call this
     //vars
     public int Lives = 3;
@@ -62,6 +65,41 @@ public class GameManager : MonoBehaviour
 
         if (Points < 0) Points = 0; //makes sure points cant go below 0. might be moved to method later
         sliderEnergy.value = (float)Energy / maxEnergy; //set 
+
+
+
+
+        //CHANGE UI TO REPRESENT CORRECT LIVES
+        //lives
+        if (Lives == 0)
+        {
+            Lives1.gameObject.SetActive(false);
+            Lives2.gameObject.SetActive(false);
+            Lives3.gameObject.SetActive(false);
+        } else if (Lives == 1)
+        {
+            Lives1.gameObject.SetActive(true);
+            Lives2.gameObject.SetActive(false);
+            Lives3.gameObject.SetActive(false);
+        } else if (Lives == 2)
+        {
+            Lives1.gameObject.SetActive(true);
+            Lives2.gameObject.SetActive(true);
+            Lives3.gameObject.SetActive(false);
+        } else if (Lives == 3)
+        {
+            Lives1.gameObject.SetActive(true);
+            Lives2.gameObject.SetActive(true);
+            Lives3.gameObject.SetActive(true);
+        } else
+        {
+            print("ERROR: NOT ENOUGH UI SPRITES TO REPRESENT HEALTH, OR OUT OF RANGE");
+            Lives1.gameObject.SetActive(false);
+            Lives2.gameObject.SetActive(false);
+            Lives3.gameObject.SetActive(false);
+        }
+        
+
     }
 
 

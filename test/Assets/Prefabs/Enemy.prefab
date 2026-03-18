@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 100019941127011361}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: EnemyPhysicalHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
