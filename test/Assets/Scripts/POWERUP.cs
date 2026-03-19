@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class POWERUP : MonoBehaviour
 {
+
+    public float speed = 6f;
+    public float maxSpawnY = 4.5f;
+    public float minSpawnY = -4.5f;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        float randomY = Random.Range(minSpawnY, maxSpawnY);
+        gameObject.transform.position = new Vector3(10.8f, randomY, 0f);
     }
     private void Awake()
     {
@@ -18,9 +25,10 @@ public class POWERUP : MonoBehaviour
     void Update()
     {
         //go left
-        
+        gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+        // all logic for actual deciding whats done is handled in PLAYER, UPON DETECTING HIT.
     }
 
-
-    //upon player touching give powerup (big if else) , set timer, hide sprite then freeze, and  once timer is done call to game to end, destroy whole object
+    // on detect player destroy (physical touch)
 }
