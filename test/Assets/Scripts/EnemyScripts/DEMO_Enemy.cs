@@ -42,9 +42,9 @@ public class DEMO_Enemy : MonoBehaviour
             lives--;
             print("Enemy collided with enemy");
             GameManager.instance.awardPoints(1, "enemy collided with other enemy"); // fully aware this is complete rng and no skill lol
-            //ADD MISSILE AND ASTEROID STUFF
+            
         }
-        else if (c.gameObject.CompareTag("Asteroid"))
+        else if (c.gameObject.CompareTag("EnemyPhysicalHit"))
         {
             lives--;
             print("Enemy collided with asteroid");

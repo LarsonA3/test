@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     //make sure it doesnt get destroyed when switching scenes.
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject); //(this might not even be needed tbh)
         Lives = 3;
         instance = this;
     }
@@ -65,7 +64,6 @@ public class GameManager : MonoBehaviour
 
         if (Points < 0) Points = 0; //makes sure points cant go below 0. might be moved to method later
         sliderEnergy.value = (float)Energy / maxEnergy; //set 
-
 
 
 
@@ -116,6 +114,9 @@ public class GameManager : MonoBehaviour
             Lives2.gameObject.SetActive(false);
             Lives3.gameObject.SetActive(false);
         }
+
+
+        // GAME OVER LOGIC HANDLED IN PLAYER SCRIPT
     }
 
     //function that player calls to see if they can fire or not

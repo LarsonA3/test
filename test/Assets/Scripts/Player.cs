@@ -1,8 +1,14 @@
-    using UnityEngine;
-    using UnityEngine.UI;
-    using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+using JetBrains.Annotations;
+using System.Collections;
+using Unity.VisualScripting;
 
 //using static UnityEngine.RuleTile.TilingRuleOutput; //this was causing error
+
+
 
 public class Player : MonoBehaviour {
       // set in inspector
@@ -24,9 +30,17 @@ public class Player : MonoBehaviour {
       private const float Y_LIMIT = 4.6f;
       private const float X_LIMIT = 9.92f;
 
+
+      public GameObject GameOver;
+      public TextMeshProUGUI FinalScoreText;
+      public TextMeshProUGUI ScoreText;
+      
+
       private void Start() {
         input = new SpaceShooterInputActions();
         input.Enable();
+        GameOver.SetActive(false);
+        this.gameObject.SetActive(true);
       }
 
         private void Update()
@@ -138,7 +152,24 @@ public class Player : MonoBehaviour {
                 missiles2.gameObject.SetActive(false);
                 missiles3.gameObject.SetActive(false);
                 missiles4.gameObject.SetActive(false);
-        }
+            }
+
+
+            if (GameManager.instance.Lives < 1)
+            {
+                // GAME OVER LOGIC 
+                print("GAME OVER!");
+
+                //put game over screen on
+                GameOver.SetActive(true);
+                FinalScoreText.text = ScoreText.text;
+
+                input.Standard.Disable();
+                //destroy character
+                this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                //reload scene
+                StartCoroutine(ReloadEverything());
+            }
 
 
 
@@ -157,5 +188,12 @@ public class Player : MonoBehaviour {
 
         }
 
-
+    private IEnumerator ReloadEverything()
+    {
+        yield return new WaitForSeconds(5f);
+        int sceneindex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneindex);
     }
+
+
+}
