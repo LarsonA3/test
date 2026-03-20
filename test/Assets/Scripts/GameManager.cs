@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     // GAME MANAGER
     // will control the level, spawns, moving to next, score, lives, game over, etc
     public Slider sliderEnergy;
+    public Slider sliderPower;
     public TextMeshProUGUI ScoreText;
 
     public Image Lives1; public Image Lives2; public Image Lives3;
@@ -51,9 +52,13 @@ public class GameManager : MonoBehaviour
         if (timer >= 1f)
         {
             if (Energy > maxEnergy - 1) return;
-            if (Energy > 9)
+            if (Energy > 14)
             {
-                Energy = Energy + 2; // gives player 2 energy if above half. rewards player for conservation and punishes spam
+                Energy = Energy + 3; // gives player 2 energy if above x. rewards player for conservation and punishes spam
+            }
+            else if (Energy > 4)
+            {
+                Energy = Energy + 2; // gives player 2 energy if above x. rewards player for conservation and punishes spam
                 
             } else
             {
