@@ -21,6 +21,10 @@ public class DEMO_Enemy : MonoBehaviour
         if (lives < 1)
         {
             GameManager.instance.awardPoints(10, "player destroyed demo enemy");
+            //EXPLOSION EFFECT
+            var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
+            Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
+
             Destroy(this.gameObject);
         }
     }
@@ -38,7 +42,7 @@ public class DEMO_Enemy : MonoBehaviour
             GameManager.instance.LoseLife();
             //EXPLOSION EFFECT
             var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
-            Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.destruction);
+            Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
 
             Destroy(this.gameObject);
             
@@ -62,6 +66,14 @@ public class DEMO_Enemy : MonoBehaviour
             lives--;
             print("Demo enemy got caught in explosion");
             GameManager.instance.awardPoints(4, "enemy hit with explosion");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("MapBorder"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }

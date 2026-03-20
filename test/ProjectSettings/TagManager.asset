@@ -8,6 +8,8 @@ TagManager:
   - EnemyPhysicalHit
   - Explosion
   - Enemy
+  - POWERUP
+  - MapBorder
   layers:
   - Default
   - TransparentFX

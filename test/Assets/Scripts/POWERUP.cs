@@ -4,8 +4,8 @@ public class POWERUP : MonoBehaviour
 {
 
     public float speed = 6f;
-    public float maxSpawnY = 4.5f;
-    public float minSpawnY = -4.5f;
+    private float maxSpawnY = 4.5f;
+    private float minSpawnY = -4.5f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,8 +27,19 @@ public class POWERUP : MonoBehaviour
         //go left
         gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
 
+        
         // all logic for actual deciding whats done is handled in PLAYER, UPON DETECTING HIT.
     }
 
     // on detect player destroy (physical touch)
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("MapBorder"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

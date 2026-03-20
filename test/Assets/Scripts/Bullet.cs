@@ -17,10 +17,15 @@ public class Bullet : MonoBehaviour
 
 
 
-        // destroy after certain amount of time. TTL is set high # to account for any frame rate
-        if (Mathf.Abs(this.transform.position.x - 10.63f) < 0.3f) {
+        
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("MapBorder"))
+        {
             Destroy(this.gameObject);
         }
-        
     }
 }
