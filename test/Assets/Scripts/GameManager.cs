@@ -72,7 +72,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    public void RestoreLives()
+    {
+        print("Game Manager restored lives to 3");
+        Lives = 3;
+    }
 
     //function that removes 1 life
     public void LoseLife()

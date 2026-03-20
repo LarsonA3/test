@@ -13,6 +13,7 @@ public class POWERUP : MonoBehaviour
     {
         float randomY = Random.Range(minSpawnY, maxSpawnY);
         gameObject.transform.position = new Vector3(10.8f, randomY, 0f);
+
     }
     private void Awake()
     {
@@ -29,9 +30,9 @@ public class POWERUP : MonoBehaviour
 
         
         // all logic for actual deciding whats done is handled in PLAYER, UPON DETECTING HIT.
-    }
 
-    // on detect player destroy (physical touch)
+
+    }
 
 
 
@@ -40,6 +41,13 @@ public class POWERUP : MonoBehaviour
         if (collision.gameObject.CompareTag("MapBorder"))
         {
             Destroy(this.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //maybe some effect here
+            Destroy(this.gameObject);
+            print("Destroyed POWERUP");
         }
     }
 }
