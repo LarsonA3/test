@@ -81,6 +81,9 @@ public class GameManager : MonoBehaviour
     {
         print("Game Manager restored lives to 3");
         Lives = 3;
+        Lives1.gameObject.SetActive(true);
+        Lives2.gameObject.SetActive(true);
+        Lives3.gameObject.SetActive(true);
     }
 
     //function that removes 1 life
