@@ -4,6 +4,8 @@ public class DEMO_Enemy : MonoBehaviour
 {
     private int lives = 3;
     public float speed = 1f;
+    public GameObject expoPrefab;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +36,12 @@ public class DEMO_Enemy : MonoBehaviour
         {
             GameManager.instance.awardPoints(7, "player destroyed demo enemy via ramming");
             GameManager.instance.LoseLife();
+            //EXPLOSION EFFECT
+            var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
+            Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.destruction);
+
             Destroy(this.gameObject);
+            
 
         }
         else if (c.gameObject.CompareTag("Enemy"))

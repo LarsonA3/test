@@ -50,8 +50,20 @@ public class Player : MonoBehaviour {
             {
                 if (GameManager.instance.CanFire() == true)
                 {
-                    GameManager.instance.RemoveEnergy();
-                    GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                    if (true == false) 
+                    {
+                        // THREE BULLET POWER UP
+                        /*
+                        GameManager.instance.RemoveEnergy();
+                        GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                        GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position + 1f, Quaternion.identity);
+                        GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position - 1f, Quaternion.identity); */
+                    } else
+                    {
+                        GameManager.instance.RemoveEnergy();
+                        GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                    }
+                    
                 }
                 
             }
