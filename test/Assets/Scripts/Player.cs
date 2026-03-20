@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public Transform bulletSpawnPoint;
     public Transform missileSpawnPoint;
 
+    public GameObject expoPrefab;
+
     private SpaceShooterInputActions input;
 
     private int missileAmount = 4;
@@ -42,6 +44,12 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI poweruptext;
     public TextMeshProUGUI poweruptextchange;
 
+    public ParticleSystem toggleparticle;
+    private ParticleSystem.EmissionModule particleJet;
+    public ParticleSystem baseJet;
+
+    private bool isExploded = false;
+
     private void Start()
     {
         input = new SpaceShooterInputActions();
@@ -51,6 +59,7 @@ public class Player : MonoBehaviour
         poweruptext.gameObject.SetActive(false);
         poweruptextchange.gameObject.SetActive(false);
         isMultishot = false;
+        particleJet = toggleparticle.gameObject.GetComponent<ParticleSystem>().emission;
     }
       
     private void Update()
@@ -94,45 +103,60 @@ public class Player : MonoBehaviour
             }
         }
 
-        //up down
-        //NEW STUFF
-        float vertMove = input.Standard.MoveVertically.ReadValue<float>(); // GIVES you -1 or +1 based on input
-        this.transform.Translate(Vector3.up * vertMove * speed * Time.deltaTime);
 
 
-        //OLD (but works for rn) BUT REPLACE EVENTUALLY WITH ABOVE METHOD UNDER NEW STUFF
-        //left right
-        if (input.Standard.MoveLeft.IsPressed())
+        //makes sure effects dont show after game over
+        if (isExploded == false)
         {
-            this.transform.Translate(Vector3.left * LRspeed * Time.deltaTime);
-        }
-        if (input.Standard.MoveRight.IsPressed())
-        {
-            this.transform.Translate(Vector3.right * LRspeed * Time.deltaTime);
-        }
+            //up down
+            //NEW STUFF
+            float vertMove = input.Standard.MoveVertically.ReadValue<float>(); // GIVES you -1 or +1 based on input
+            this.transform.Translate(Vector3.up * vertMove * speed * Time.deltaTime);
 
 
-        //y max limits - prevents plr from going out of bounds on y axis
-        if (this.transform.position.y > Y_LIMIT)
-        {
-            this.transform.position = new Vector3(transform.position.x, Y_LIMIT);
-        }
-        else if (this.transform.position.y < -Y_LIMIT)
-        {
-            this.transform.position = new Vector3(transform.position.x, -Y_LIMIT);
-        }
+            //OLD (but works for rn) BUT REPLACE EVENTUALLY WITH ABOVE METHOD UNDER NEW STUFF
+            //left right
+            if (input.Standard.MoveLeft.IsPressed())
+            {
+                this.transform.Translate(Vector3.left * LRspeed * Time.deltaTime);
+            }
+            if (input.Standard.MoveRight.IsPressed())
+            {
+                this.transform.Translate(Vector3.right * LRspeed * Time.deltaTime);
+            }
 
-        //x max limits - prevents plr from going out of bounds on x axis
-        if (this.transform.position.x > X_LIMIT)
-        {
-            this.transform.position = new Vector3(X_LIMIT, transform.position.y, 0);
-        }
-        else if (this.transform.position.x < -X_LIMIT)
-        {
-            this.transform.position = new Vector3(-X_LIMIT, transform.position.y, 0);
-        }
+            // JET EFFECT
+            if (vertMove != 0 || input.Standard.MoveLeft.IsPressed() || input.Standard.MoveRight.IsPressed())
+            {
+                particleJet.rateOverTime = 1000;
+            }
+            else
+            {
+                particleJet.rateOverTime = 0;
+            }
 
 
+            //y max limits - prevents plr from going out of bounds on y axis
+            if (this.transform.position.y > Y_LIMIT)
+            {
+                this.transform.position = new Vector3(transform.position.x, Y_LIMIT);
+            }
+            else if (this.transform.position.y < -Y_LIMIT)
+            {
+                this.transform.position = new Vector3(transform.position.x, -Y_LIMIT);
+            }
+
+            //x max limits - prevents plr from going out of bounds on x axis
+            if (this.transform.position.x > X_LIMIT)
+            {
+                this.transform.position = new Vector3(X_LIMIT, transform.position.y, 0);
+            }
+            else if (this.transform.position.x < -X_LIMIT)
+            {
+                this.transform.position = new Vector3(-X_LIMIT, transform.position.y, 0);
+            }
+
+        }
 
 
         //CHANGE UI TO REPRESENT CORRECT MISSILES
@@ -184,11 +208,23 @@ public class Player : MonoBehaviour
         if (GameManager.instance.Lives < 1)
         {
             // GAME OVER LOGIC 
-            print("GAME OVER!");
+            
 
             //put game over screen on
             GameOver.SetActive(true);
             FinalScoreText.text = ScoreText.text;
+
+            //EXPLOSION EFFECT
+            if (isExploded == false)
+            {
+                print("GAME OVER!");
+                var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
+                Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
+                baseJet.gameObject.SetActive(false);
+                toggleparticle.gameObject.SetActive(false);
+                isExploded = true;
+            }
+            
 
             input.Standard.Disable();
             //destroy character

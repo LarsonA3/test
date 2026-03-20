@@ -9,6 +9,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float maxSpawnY = 4.5f;
     public float minSpawnY = -4.5f;
 
+    public GameObject expoPrefab;
+
     private int health = 4; //hits required to kill by bullets
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,12 +28,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // move left ()
         gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
 
-        //if health gone destroy
-        if (health < 1 )
-        {
-            Destroy(this.gameObject);
-            GameManager.instance.awardPoints(5, "asteroid destroyed by bullet (presumably)");
-        }
+
 
     }
 
@@ -59,6 +56,20 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
             // destroy own hitbox
             Destroy(selfcollider);
+        }
+
+
+
+        //if health gone destroy
+        if (health < 1)
+        {
+            //EXPLOSION EFFECT
+            var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
+            Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
+
+            Destroy(this.gameObject);
+            GameManager.instance.awardPoints(5, "asteroid destroyed by bullet (presumably)");
+
         }
     }
 

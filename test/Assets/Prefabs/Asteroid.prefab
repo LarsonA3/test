@@ -144,3 +144,4 @@ MonoBehaviour:
   speed: 6
   maxSpawnY: 4.5
   minSpawnY: -4.5
+  expoPrefab: {fileID: 6422578739831022878, guid: 7e508aab50787e049aaa22f5b3a705fc, type: 3}

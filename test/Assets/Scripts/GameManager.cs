@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         removePoints(10);
         print("removed pts");
         //CHANGE UI TO REPRESENT CORRECT LIVES
-        if (Lives == 0)
+        if (Lives < 1)
         {
             Lives1.gameObject.SetActive(false);
             Lives2.gameObject.SetActive(false);
