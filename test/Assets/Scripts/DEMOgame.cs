@@ -124,10 +124,10 @@ public class Game : MonoBehaviour
         {
 
             print("LEVEL: Playing current level for x seconds");
-            yield return new WaitForSeconds(20f);
+            yield return new WaitForSeconds(60f);
 
             normalSpawning = false;
-
+            if (GameManager.instance.Lives < 1) yield return null;
 
             ///////////////BOSS LOGIC WOULD BE IN HERE
 
