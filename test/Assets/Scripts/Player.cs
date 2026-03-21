@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private bool isMultishot = false;
     private bool isInfMissile = false;
     private bool isInfEnergy = false;
+    private bool isDoubleShot = false;
 
     private AudioSource audiosrc;
     public AudioClip firesfx;
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
         isMultishot = false;
         isInfMissile = false;
         isInfEnergy = false;
+        isDoubleShot = false;
 
         particleJet = toggleparticle.gameObject.GetComponent<ParticleSystem>().emission;
         audiosrc = GetComponent<AudioSource>();
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour
                 audiosrc.clip = firesfx;
                 audiosrc.Play();
 
-                if (isMultishot == true)
+                if (isMultishot)
                 {
                     // THREE BULLET POWER UP
                     if (isInfEnergy == false) GameManager.instance.RemoveEnergy();
@@ -95,6 +97,13 @@ public class Player : MonoBehaviour
                     Vector3 botPos = new Vector3(bulletSpawnPoint.position.x, bulletSpawnPoint.position.y - 1f, bulletSpawnPoint.position.z);
                     GameObject bulletObj3 = Instantiate(bulletPrefab, botPos, Quaternion.identity);
 
+                }
+                else if (isDoubleShot)
+                {
+                    //two bullets going straight
+                    if (isInfEnergy == false) GameManager.instance.RemoveEnergy();
+                    GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                    GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
                 }
                 else
                 {
@@ -350,6 +359,15 @@ public class Player : MonoBehaviour
                     Destroy(enemy, expoPrefab.GetComponent<ParticleSystem>().main.duration);
                 }
             }
+            else if (random == 7) // double shot
+            {
+                print("player got double shot");
+                //change ui text
+                poweruptextchange.text = "DOUBLE SHOT";
+                //do effect
+                isDoubleShot = true;
+                StartCoroutine(WaitandEND(PowerupTime));
+            }
 
 
             audiosrc.clip = powerupsfx;
@@ -380,8 +398,8 @@ public class Player : MonoBehaviour
         //reset all bools to stop powerups
         isMultishot = false;
         isInfMissile = false;
-        isInfEnergy= false;
+        isInfEnergy = false;
         GameManager.instance.setInvulnerable(false);
-
+        isDoubleShot = false;
     }
 }
