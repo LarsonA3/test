@@ -6,6 +6,8 @@ public class DEMO_Enemy : MonoBehaviour
     public float speed = 1f;
     public GameObject expoPrefab;
 
+    public ParticleSystem hitfx;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +37,8 @@ public class DEMO_Enemy : MonoBehaviour
         {
             lives--;
             print("Demo enemy got shot");
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
         }
         else if (c.gameObject.CompareTag("Player"))
         {
@@ -45,7 +49,9 @@ public class DEMO_Enemy : MonoBehaviour
             Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
 
             Destroy(this.gameObject);
-            
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
+
 
         }
         else if (c.gameObject.CompareTag("Enemy"))
@@ -53,19 +59,25 @@ public class DEMO_Enemy : MonoBehaviour
             lives--;
             print("Enemy collided with enemy");
             GameManager.instance.awardPoints(1, "enemy collided with other enemy"); // fully aware this is complete rng and no skill lol
-            
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
+
         }
         else if (c.gameObject.CompareTag("EnemyPhysicalHit"))
         {
             lives--;
             print("Enemy collided with asteroid");
             GameManager.instance.awardPoints(1, "enemy collided with asteroid"); // same for this one lol
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
         }
         else if (c.gameObject.CompareTag("Explosion"))
         {
             lives--;
             print("Demo enemy got caught in explosion");
             GameManager.instance.awardPoints(4, "enemy hit with explosion");
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
         }
     }
 

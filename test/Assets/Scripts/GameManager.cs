@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     // will control the level, spawns, moving to next, score, lives, game over, etc
     public Slider sliderEnergy;
     public TextMeshProUGUI ScoreText;
-    public Slider sliderPower;
+    
 
     public Image Lives1; public Image Lives2; public Image Lives3;
 

@@ -4,6 +4,8 @@ using System.Collections; //for explosion effect
 
 public class Explosion : MonoBehaviour
 {
+    public ParticleSystem hitfx;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,13 +22,17 @@ public class Explosion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyPhysicalHit"))
         {
-            GameManager.instance.awardPoints(7, "asteroid destroyed by missile");
+            GameManager.instance.awardPoints(7, "thing destroyed by missile");
             Destroy(collision.gameObject);
+            var thing = Instantiate(hitfx, collision.gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
         }
         if (collision.transform.root.gameObject.CompareTag("Player"))
         {
             Debug.Log("plr got hit by explosion");
             GameManager.instance.LoseLife();
+            var thing = Instantiate(hitfx, collision.gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
             //Destroy(this.gameObject.GetComponent<Collider2D>()); 
         }
     }

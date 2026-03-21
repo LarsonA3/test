@@ -9484,7 +9484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   sliderEnergy: {fileID: 891043027}
   ScoreText: {fileID: 396105295}
-  sliderPower: {fileID: 0}
   Lives1: {fileID: 348893347}
   Lives2: {fileID: 984821849}
   Lives3: {fileID: 1350123813}

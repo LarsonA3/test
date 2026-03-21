@@ -61,6 +61,8 @@ public class Player : MonoBehaviour
 
     private bool isExploded = false;
 
+    private ParticleSystem hitfx;
+
     private void Start()
     {
         input = new SpaceShooterInputActions();
@@ -275,6 +277,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyPhysicalHit"))
         {
             gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
         }
     }
 

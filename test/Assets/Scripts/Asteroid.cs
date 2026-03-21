@@ -11,6 +11,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public GameObject expoPrefab;
 
+    public ParticleSystem hitfx;
+
     private int health = 4; //hits required to kill by bullets
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,7 +45,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
         {
             health--;
             //LOSE HALF HEALTH
-            Debug.Log("asteroid lost 1hp");
+            Debug.Log("asteroid lost 1hp"); 
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
         }
 
         //if hit plr damage
@@ -53,6 +57,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
             hitAlready = true;
             // send to GameManager to remove life
             GameManager.instance.LoseLife();
+            var thing = Instantiate(hitfx, gameObject.transform.position, Quaternion.identity, this.transform);
+            var thing2 = Instantiate(hitfx, collision.gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
+            Destroy(thing2, thing.main.duration);
+
 
             // destroy own hitbox
             Destroy(selfcollider);
