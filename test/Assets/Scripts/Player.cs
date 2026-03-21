@@ -38,6 +38,12 @@ public class Player : MonoBehaviour
     private bool isMultishot = false;
 
 
+    private AudioSource audiosrc;
+    public AudioClip firesfx;
+    public AudioClip missilesfx;
+    public AudioClip powerupsfx;
+    public AudioClip gameoversfx;
+
     public GameObject GameOver;
     public TextMeshProUGUI FinalScoreText;
     public TextMeshProUGUI ScoreText;
@@ -60,6 +66,7 @@ public class Player : MonoBehaviour
         poweruptextchange.gameObject.SetActive(false);
         isMultishot = false;
         particleJet = toggleparticle.gameObject.GetComponent<ParticleSystem>().emission;
+        audiosrc = GetComponent<AudioSource>();
     }
       
     private void Update()
@@ -69,6 +76,9 @@ public class Player : MonoBehaviour
         {
             if (GameManager.instance.CanFire() == true)
             {
+                audiosrc.clip = firesfx;
+                audiosrc.Play();
+
                 if (isMultishot == true)
                 {
                     // THREE BULLET POWER UP
@@ -94,6 +104,9 @@ public class Player : MonoBehaviour
         {
             if (missileAmount > 0)
             {
+                audiosrc.clip = missilesfx;
+                audiosrc.Play();
+
                 GameObject MissileObj = Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
                 missileAmount = missileAmount - 1;
             }
@@ -214,6 +227,8 @@ public class Player : MonoBehaviour
             GameOver.SetActive(true);
             FinalScoreText.text = ScoreText.text;
 
+
+
             //EXPLOSION EFFECT
             if (isExploded == false)
             {
@@ -223,6 +238,9 @@ public class Player : MonoBehaviour
                 baseJet.gameObject.SetActive(false);
                 toggleparticle.gameObject.SetActive(false);
                 isExploded = true;
+
+                audiosrc.clip = gameoversfx;
+                audiosrc.Play();
             }
             
 
@@ -257,7 +275,7 @@ public class Player : MonoBehaviour
         {
             print("player picked up POWERUP");
             //POWER UP LOGIC
-            int random = Random.Range(0,3); //will not give 3
+            int random = Random.Range(0,7); //will not give 3
             if (random == 0) // FULL HEALTH REFILL
             {
                 print("player got full hp refill");
@@ -289,6 +307,26 @@ public class Player : MonoBehaviour
                 isMultishot = true;
                 StartCoroutine(WaitandEND(PowerupTime)); // power up length in seconds time
             }
+            else if (random == 3) // infinite missiles
+            {
+
+            }
+            else if (random == 4) // infinite energy
+            {
+
+            }
+            else if (random == 5) // infinite health (make sure player cant lose points)
+            {
+
+            }
+            else if (random == 6) // nuke, blows up all enemies on screen
+            {
+
+            }
+
+
+            audiosrc.clip = powerupsfx;
+            audiosrc.Play();
 
 
             //after loop, show text on screen
