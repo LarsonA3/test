@@ -221,34 +221,30 @@ public class Player : MonoBehaviour
         if (GameManager.instance.Lives < 1)
         {
             // GAME OVER LOGIC 
-            
-
-            //put game over screen on
-            GameOver.SetActive(true);
-            FinalScoreText.text = ScoreText.text;
-
-
-
+         
             //EXPLOSION EFFECT
             if (isExploded == false)
             {
+                //put game over screen on
+                GameOver.SetActive(true);
+                FinalScoreText.text = ScoreText.text;
                 print("GAME OVER!");
                 var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
                 Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
-                baseJet.gameObject.SetActive(false);
-                toggleparticle.gameObject.SetActive(false);
+                //hide
+                transform.Find("Triangle").gameObject.SetActive(false);
+
                 isExploded = true;
 
                 audiosrc.clip = gameoversfx;
                 audiosrc.Play();
+
+
+                input.Standard.Disable();
+                //reload scene
+                StartCoroutine(ReloadEverything());
             }
             
-
-            input.Standard.Disable();
-            //destroy character
-            this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            //reload scene
-            StartCoroutine(ReloadEverything());
         }
     }
 

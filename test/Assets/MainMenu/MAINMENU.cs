@@ -7,11 +7,12 @@ public class MAINMENU : MonoBehaviour
 {
 
     public Button playButton;
+    private AudioSource audiosrc;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        audiosrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,8 +21,11 @@ public class MAINMENU : MonoBehaviour
         
     }
 
-    public void OnPlayButtonClick(Button button)
+    public void OnPlayButtonClick()
     {
+        print("button clicked");
+        audiosrc.Play();
         SceneManager.LoadScene("ShooterGame");
+        
     }
 }
