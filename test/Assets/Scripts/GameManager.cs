@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public int maxEnergy = 20; // bullet = 2 energy
 
     public int Energy = 20; // current energy
+
+    private bool isInvulnerable = false;
     
     //make sure it doesnt get destroyed when switching scenes.
     private void Awake()
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
     //function that removes 1 life
     public void LoseLife()
     {
+        if (isInvulnerable) return;
         Lives--;
         print("lost life");
         //additionally, remove x points
@@ -163,4 +166,8 @@ public class GameManager : MonoBehaviour
         Debug.Log($"REMOVED {pts} points!"); // string interpolation example
     }
 
+    public void setInvulnerable(bool i)
+    {
+        isInvulnerable = i;
+    }
 }

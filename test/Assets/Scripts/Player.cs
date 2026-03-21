@@ -1,10 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //using static UnityEngine.RuleTile.TilingRuleOutput; //this was causing error
 
@@ -36,7 +37,8 @@ public class Player : MonoBehaviour
     private const float X_LIMIT = 9.92f;
 
     private bool isMultishot = false;
-
+    private bool isInfMissile = false;
+    private bool isInfEnergy = false;
 
     private AudioSource audiosrc;
     public AudioClip firesfx;
@@ -65,6 +67,9 @@ public class Player : MonoBehaviour
         poweruptext.gameObject.SetActive(false);
         poweruptextchange.gameObject.SetActive(false);
         isMultishot = false;
+        isInfMissile = false;
+        isInfEnergy = false;
+
         particleJet = toggleparticle.gameObject.GetComponent<ParticleSystem>().emission;
         audiosrc = GetComponent<AudioSource>();
     }
@@ -74,7 +79,7 @@ public class Player : MonoBehaviour
         // FIRE BULLET
         if (input.Standard.Fire.WasPressedThisFrame())
         {
-            if (GameManager.instance.CanFire() == true)
+            if (GameManager.instance.CanFire() == true || isInfEnergy)
             {
                 audiosrc.clip = firesfx;
                 audiosrc.Play();
@@ -82,7 +87,7 @@ public class Player : MonoBehaviour
                 if (isMultishot == true)
                 {
                     // THREE BULLET POWER UP
-                    GameManager.instance.RemoveEnergy();
+                    if (isInfEnergy == false) GameManager.instance.RemoveEnergy();
 
                     GameObject bulletObj1 = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
                     Vector3 topPos = new Vector3(bulletSpawnPoint.position.x, bulletSpawnPoint.position.y + 1f, bulletSpawnPoint.position.z);
@@ -93,7 +98,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    GameManager.instance.RemoveEnergy();
+                    if (isInfEnergy == false) GameManager.instance.RemoveEnergy();
                     GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
                 }
             }
@@ -102,13 +107,13 @@ public class Player : MonoBehaviour
         // FIRE MISSILE
         if (input.Standard.FireMissile.WasPressedThisFrame())
         {
-            if (missileAmount > 0)
+            if (missileAmount > 0 || isInfMissile)
             {
                 audiosrc.clip = missilesfx;
                 audiosrc.Play();
 
                 GameObject MissileObj = Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
-                missileAmount = missileAmount - 1;
+                if (isInfMissile == false) missileAmount = missileAmount - 1;
             }
             else
             {
@@ -170,6 +175,7 @@ public class Player : MonoBehaviour
             }
 
         }
+        
 
 
         //CHANGE UI TO REPRESENT CORRECT MISSILES
@@ -305,19 +311,44 @@ public class Player : MonoBehaviour
             }
             else if (random == 3) // infinite missiles
             {
-
+                print("player got inf missiles");
+                //change ui text
+                poweruptextchange.text = "INF MISSILES";
+                //do effect
+                isInfMissile = true;
+                StartCoroutine(WaitandEND(PowerupTime));
             }
             else if (random == 4) // infinite energy
             {
-
+                print("player got inf energy");
+                //change ui text
+                poweruptextchange.text = "INF ENERGY";
+                //do effect
+                isInfEnergy = true;
+                StartCoroutine(WaitandEND(PowerupTime));
             }
             else if (random == 5) // infinite health (make sure player cant lose points)
             {
-
+                print("player got inf health");
+                //change ui text
+                poweruptextchange.text = "INVULNERABILITY";
+                //do effect
+                GameManager.instance.setInvulnerable(true);
+                StartCoroutine(WaitandEND(PowerupTime));
             }
             else if (random == 6) // nuke, blows up all enemies on screen
             {
-
+                print("player got nuke");
+                //change ui text
+                poweruptextchange.text = "NUKE";
+                //do effect
+                GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("EnemyPhysicalHit"); // find all enemies in scene
+                foreach (GameObject enemy in allEnemies)
+                {
+                    Instantiate(expoPrefab, enemy.transform.position, Quaternion.identity, enemy.transform);
+                    GameManager.instance.awardPoints(10, "player nuked something");
+                    Destroy(enemy, expoPrefab.GetComponent<ParticleSystem>().main.duration);
+                }
             }
 
 
@@ -335,6 +366,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
     private IEnumerator HidePowerupText()
     {
         yield return new WaitForSeconds(2);
@@ -346,6 +379,9 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(thing);
         //reset all bools to stop powerups
         isMultishot = false;
+        isInfMissile = false;
+        isInfEnergy= false;
+        GameManager.instance.setInvulnerable(false);
 
     }
 }
