@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
             }
 
             // JET EFFECT
-            if (vertMove != 0 || input.Standard.MoveLeft.IsPressed() || input.Standard.MoveRight.IsPressed())
+            if (vertMove != 0 || input.Standard.MoveRight.IsPressed())
             {
                 particleJet.rateOverTime = 1000;
             }
@@ -261,6 +261,8 @@ public class Player : MonoBehaviour
             }
             
         }
+
+
     }
 
     //fixes player after they finish colliding with object - THIS IS INTENDED DO NOT REMOVE!
@@ -286,7 +288,7 @@ public class Player : MonoBehaviour
         {
             print("player picked up POWERUP");
             //POWER UP LOGIC
-            int random = Random.Range(0,7); //will not give 3
+            int random = Random.Range(0,8); //will not give max val
             if (random == 0) // FULL HEALTH REFILL
             {
                 print("player got full hp refill");
@@ -356,6 +358,7 @@ public class Player : MonoBehaviour
                 {
                     Instantiate(expoPrefab, enemy.transform.position, Quaternion.identity, enemy.transform);
                     GameManager.instance.awardPoints(10, "player nuked something");
+                    foreach (SpriteRenderer sprite in enemy.GetComponentsInChildren<SpriteRenderer>()) { sprite.enabled = false; }
                     Destroy(enemy, expoPrefab.GetComponent<ParticleSystem>().main.duration);
                 }
             }
