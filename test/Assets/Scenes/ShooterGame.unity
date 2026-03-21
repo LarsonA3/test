@@ -4908,9 +4908,10 @@ MonoBehaviour:
   missiles2: {fileID: 830224197}
   missiles3: {fileID: 371802476}
   missiles4: {fileID: 332857614}
+  sliderPower: {fileID: 1723857825}
   firesfx: {fileID: 8300000, guid: bf4a4a4e3d9bb724b8a633851e03d870, type: 3}
   missilesfx: {fileID: 8300000, guid: f7b248dd26f1ae64a8c5974a38799b35, type: 3}
-  powerupsfx: {fileID: 8300000, guid: 164f0536dcf1da24ea314db8ae9de576, type: 3}
+  powerupsfx: {fileID: 8300000, guid: 8f9115a922631d9429b5e9724575b86d, type: 3}
   gameoversfx: {fileID: 8300000, guid: 7ac7e940836058944bd42f62613dc634, type: 3}
   GameOver: {fileID: 679426623}
   FinalScoreText: {fileID: 1150922778}
@@ -9482,8 +9483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   sliderEnergy: {fileID: 891043027}
-  sliderPower: {fileID: 1723857825}
   ScoreText: {fileID: 396105295}
+  sliderPower: {fileID: 0}
   Lives1: {fileID: 348893347}
   Lives2: {fileID: 984821849}
   Lives3: {fileID: 1350123813}
@@ -9722,6 +9723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1723857824}
   - component: {fileID: 1723857825}
+  - component: {fileID: 1723857826}
   m_Layer: 5
   m_Name: PowerBar
   m_TagString: Untagged
@@ -9795,12 +9797,109 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 15
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!82 &1723857826
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723857823}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 6f13ea47f294d784a9b122a8cc5d7d8e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1725905787
 GameObject:
   m_ObjectHideFlags: 0

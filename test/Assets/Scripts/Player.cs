@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
     private bool isInfEnergy = false;
     private bool isDoubleShot = false;
 
+    public Slider sliderPower;
+
     private AudioSource audiosrc;
     public AudioClip firesfx;
     public AudioClip missilesfx;
@@ -74,6 +76,8 @@ public class Player : MonoBehaviour
 
         particleJet = toggleparticle.gameObject.GetComponent<ParticleSystem>().emission;
         audiosrc = GetComponent<AudioSource>();
+
+        sliderPower.value = 0;
     }
       
     private void Update()
@@ -375,7 +379,7 @@ public class Player : MonoBehaviour
 
             audiosrc.clip = powerupsfx;
             audiosrc.Play();
-
+            StartCoroutine(PowerbarCountdown());
 
             //after loop, show text on screen
             poweruptext.gameObject.SetActive(true);
@@ -405,4 +409,21 @@ public class Player : MonoBehaviour
         GameManager.instance.setInvulnerable(false);
         isDoubleShot = false;
     }
+
+    private IEnumerator PowerbarCountdown()
+    {
+        sliderPower.maxValue = PowerupTime;
+        int i = PowerupTime;
+        while (i > 0)
+        {
+            sliderPower.value = i;
+            yield return new WaitForSeconds(1);
+            i--;
+        }
+
+        sliderPower.value = 0;
+        sliderPower.GetComponent<AudioSource>().Play();
+    }
+
+
 }
