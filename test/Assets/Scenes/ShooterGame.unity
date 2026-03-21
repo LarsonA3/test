@@ -4920,6 +4920,7 @@ MonoBehaviour:
   poweruptextchange: {fileID: 716275824}
   toggleparticle: {fileID: 1668577812}
   baseJet: {fileID: 1914845519}
+  hitfx: {fileID: 3280849173614166147, guid: 4a90a0f682db7584484c1d8dd4c681b7, type: 3}
 --- !u!82 &786289105
 AudioSource:
   m_ObjectHideFlags: 0

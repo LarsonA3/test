@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 
     private bool isExploded = false;
 
-    private ParticleSystem hitfx;
+    public ParticleSystem hitfx;
 
     private void Start()
     {
@@ -285,8 +285,7 @@ public class Player : MonoBehaviour
     private IEnumerator ReloadEverything()
     {
         yield return new WaitForSeconds(5f);
-        int sceneindex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(sceneindex);
+        SceneManager.LoadScene("MainMenu");
     }
 
 
