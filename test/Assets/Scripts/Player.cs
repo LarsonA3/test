@@ -390,11 +390,8 @@ public class Player : MonoBehaviour
 
             StartCoroutine(HidePowerupText());
 
-
         }
     }
-
-
 
     private IEnumerator HidePowerupText()
     {
@@ -402,6 +399,7 @@ public class Player : MonoBehaviour
         poweruptext.gameObject.SetActive(false);
         poweruptextchange.gameObject.SetActive(false);
     }
+
     private IEnumerator WaitandEND(float thing)
     {
         yield return new WaitForSeconds(thing);
