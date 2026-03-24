@@ -13,7 +13,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public ParticleSystem hitfx;
 
-    private int health = 4; //hits required to kill by bullets
+    private int health = 5; //hits required to kill by bullets
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
