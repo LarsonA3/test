@@ -1,0 +1,59 @@
+using UnityEngine;
+using static UnityEngine.UI.Image;
+using System.Collections; //for explosion effect
+
+public class Explosion : MonoBehaviour
+{
+    public ParticleSystem hitfx;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        StartCoroutine(Effect());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyPhysicalHit"))
+        {
+            GameManager.instance.awardPoints(7, "thing destroyed by missile");
+            Destroy(collision.gameObject);
+            var thing = Instantiate(hitfx, collision.gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
+        }
+        if (collision.transform.root.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("plr got hit by explosion");
+            GameManager.instance.LoseLife();
+            var thing = Instantiate(hitfx, collision.gameObject.transform.position, Quaternion.identity, this.transform);
+            Destroy(thing, thing.main.duration);
+            //Destroy(this.gameObject.GetComponent<Collider2D>()); 
+        }
+    }
+
+    IEnumerator Effect()
+    {
+        Vector3 original = transform.localScale;
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime * 3f;
+            transform.localScale = Vector3.Lerp(original, original * 1.25f, t);
+            yield return null;
+        }
+        t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime * 3f;
+            transform.localScale = Vector3.Lerp(original * 1.25f, Vector3.zero, t);
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+}
