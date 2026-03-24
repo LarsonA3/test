@@ -134,22 +134,13 @@ public class BossEnemy : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        GameManager.instance.awardPoints(50, "boss defeated");
-        GameManager.instance.RegisterKill();
-
         if (expoPrefab != null)
         {
             var expoObj = Instantiate(expoPrefab, transform.position, Quaternion.identity);
             Destroy(expoObj, expoObj.GetComponent<ParticleSystem>().main.duration);
         }
 
-        if (WinScreen != null)
-        {
-            WinScreen.SetActive(true);
-            if (WinScoreText != null)
-                WinScoreText.text = "SCORE: " + GameManager.instance.Points;
-        }
-
+        GameManager.instance.RegisterBossKill();
         Destroy(this.gameObject);
     }
 

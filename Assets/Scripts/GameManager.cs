@@ -86,8 +86,8 @@ public class GameManager : MonoBehaviour
         // Refill 50% of max energy on kill, capped at max
         Energy = Mathf.Min(Energy + (maxEnergy / 2), maxEnergy);
 
-        // Check for level up
-        if (CurrentLevel < MaxLevel)
+        // Checks for every 4 levels
+        if (CurrentLevel % 4 != 0)
         {
             if (KillCount % KillsPerLevel == 0)
             {
@@ -181,5 +181,14 @@ public class GameManager : MonoBehaviour
     public void setInvulnerable(bool i)
     {
         isInvulnerable = i;
+    }
+
+
+
+    public void RegisterBossKill()
+    {
+        KillCount = 0;
+        CurrentLevel++;
+        OnLevelUp?.Invoke(CurrentLevel);
     }
 }
